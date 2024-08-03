@@ -93,21 +93,25 @@ class Doc {
     this.image,
     this.audio,
     this.video,
+    // this.document,
   });
 
   List<String>? image;
   List<String>? audio;
   List<String>? video;
+  // List<String>? document;
 
   factory Doc.fromJson(Map<String, dynamic> json) => Doc(
     image: json["image"] == null ? [] : List<String>.from(json["image"]!.map((x) => x)),
     audio: json["audio"] == null ? [] : List<String>.from(json["audio"]!.map((x) => x)),
     video: json["video"] == null ? [] : List<String>.from(json["video"]!.map((x) => x)),
+    // document: json["document"] == null ? [] : List<String>.from(json["document"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "image": image == null ? [] : List<dynamic>.from(image!.map((x) => x)),
     "audio": audio == null ? [] : List<dynamic>.from(audio!.map((x) => x)),
     "video": video == null ? [] : List<dynamic>.from(video!.map((x) => x)),
+    // "document": document == null ? [] : List<dynamic>.from(document!.map((x) => x)),
   };
 }

@@ -64,15 +64,18 @@ class Doc {
     required this.image,
     required this.audio,
     required this.video,
+    // required this.document,
   });
   late final List<String> image;
   late final List<String> audio;
   late final List<String> video;
+  // late final List<String> document;
 
   Doc.fromJson(Map<String, dynamic> json){
     image = List.castFrom<dynamic, String>(json['image']);
     audio = List.castFrom<dynamic, String>(json['audio']);
     video = List.castFrom<dynamic, String>(json['video']);
+    // document = List.castFrom<dynamic, String>(json['document']);
   }
 
   Map<String, dynamic> toJson() {
@@ -80,6 +83,7 @@ class Doc {
     _data['image'] = image;
     _data['audio'] = audio;
     _data['video'] = video;
+    // _data['document'] = document;
     return _data;
   }
 }

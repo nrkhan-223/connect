@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:connect/Const/route.dart';
+import 'package:connect/Splash/congratulationpage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -69,9 +71,12 @@ class MembershipUpdate extends ChangeNotifier {
 
       if (responce.statusCode == 200) {
         // log("response code =200");
+
         var datadecode = await jsonDecode(responce.body);
         print(datadecode);
+
         if (datadecode['error'] == 0) {
+          newPage(context: context, child: const CongratsPage());
           Fluttertoast.showToast(
               msg: "${datadecode["msg"]}",
               toastLength: Toast.LENGTH_LONG,
@@ -99,10 +104,11 @@ class MembershipUpdate extends ChangeNotifier {
     } finally {
       load(member, context);
       // Navigator.pop(context);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const BottomNavPage()),
-          (route) => false);
+
+      // Navigator.pushAndRemoveUntil(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => const BottomNavPage()),
+      //     (route) => false);
       // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>MemberShipPage(mambershipName: member,) ,));
     }
 

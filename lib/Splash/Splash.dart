@@ -1,17 +1,13 @@
-
-
-
 import 'package:connect/BottomNav/bottomNavPage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-
 import '../Const/route.dart';
 import '../controllar/userprofileController/userProfileController.dart';
 import '../onboarding/Onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -27,15 +23,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
    if(box.get("userid")==null){
-     Future.delayed(Duration(seconds: 3),(){
-       newPage(context: context, child:Onboarding());
+     Future.delayed(const Duration(seconds: 3),(){
+       newPage(context: context, child:const Onboarding());
      });
 
    }
    else{
      load().then((value) {
        Navigator.pushAndRemoveUntil(
-           context, MaterialPageRoute(builder: (context) => BottomNavPage()), (
+           context, MaterialPageRoute(builder: (context) => const BottomNavPage()), (
            route) => false);
        // newPage(context: context, child:const BottomNavPage()));
      });

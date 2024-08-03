@@ -169,12 +169,12 @@ class AddLinkControllar extends ChangeNotifier {
         if (json['error'] == 0) {
           Fluttertoast.showToast(
               msg: "Upload Successful",
-              toastLength: Toast.LENGTH_SHORT,
+              toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
               backgroundColor: Colors.green,
               textColor: Colors.white,
-              fontSize: 16.0);
+              fontSize: 18.0);
 
           notifyListeners();
           return true;
@@ -182,12 +182,12 @@ class AddLinkControllar extends ChangeNotifier {
           print(json['msg'] + "msgggg");
           Fluttertoast.showToast(
               msg: json['msg'],
-              toastLength: Toast.LENGTH_SHORT,
+              toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
               backgroundColor: Colors.green,
               textColor: Colors.white,
-              fontSize: 16.0);
+              fontSize: 18.0);
           notifyListeners();
           return false;
         }

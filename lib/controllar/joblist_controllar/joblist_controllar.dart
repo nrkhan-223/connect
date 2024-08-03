@@ -7,8 +7,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class JobListControllar extends ChangeNotifier {
-  // var joblistdata=JobListModel();
-
   int ofssetpage = 0;
   int limit = 3;
   var pageloder = false;
@@ -41,7 +39,7 @@ class JobListControllar extends ChangeNotifier {
   // //   notifyListeners();
   // // }
 
-  List<JobMsg> _data = [];
+  final List<JobMsg> _data = [];
   List<JobMsg> get data => _data;
 
   int _currentPage = 1;

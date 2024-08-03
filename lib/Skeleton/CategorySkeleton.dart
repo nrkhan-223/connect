@@ -8,7 +8,7 @@ Widget categorySkeleton(){
       primary: false,
       shrinkWrap: true,
       // physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 4.0,
           mainAxisSpacing: 5.0,
@@ -20,7 +20,7 @@ Widget categorySkeleton(){
           children:  [
             const SkeletonAvatar(
                 style: SkeletonAvatarStyle(width: 45, height: 45)),
-            SizedBox(height: 3,),
+            const SizedBox(height: 3,),
             SkeletonParagraph(
               style: SkeletonParagraphStyle(
                   lines: 1,
@@ -32,7 +32,7 @@ Widget categorySkeleton(){
                     minLength: MediaQuery.of(context).size.width / 2,
                   )),
             ),
-            SizedBox(height: 8,),
+            const SizedBox(height: 8,),
           ],
         );
       });

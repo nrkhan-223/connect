@@ -1,7 +1,10 @@
 import 'package:aamarpay/aamarpay.dart';
 import 'package:connect/controllar/userprofileController/userProfileController.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import '../BottomNav/bottomNavPage.dart';
+import '../Const/route.dart';
 import '../controllar/membershipUpdate/membershipUpdate.dart';
 
 class MyPay extends StatefulWidget {
@@ -45,6 +48,16 @@ class MyPayState extends State<MyPay> {
                   .then((value) {
                 //membershipUpdate.load(widget.membershipName, context);
               });
+            }else{
+              newPage(context: context, child: const BottomNavPage());
+              Fluttertoast.showToast(
+                  msg: "Failed to update membership",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 18.0);
             }
           },
           cancelUrl: "https://www.merchantdomain.com/index.html",

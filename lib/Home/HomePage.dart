@@ -18,9 +18,11 @@ import '../widget/categoryWidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
 class _HomePageState extends State<HomePage> {
   bool show = false;
   var load = false;
@@ -28,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   var tigarPage = 3;
   var error = false;
   ScrollController scrollController = ScrollController();
+
   Future loding() async {
     setState(() {
       load = true;
@@ -39,25 +42,29 @@ class _HomePageState extends State<HomePage> {
         Provider.of<JobListControllar>(context, listen: false);
     await joblistcontroller.fetchData();
   }
+
   Future refresh() async {
     final joblistcontroller =
         Provider.of<JobListControllar>(context, listen: false);
     await joblistcontroller.reset();
   }
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
   void _scrollListener() {
     final provider = Provider.of<JobListControllar>(context, listen: false);
     if (scrollController.position.pixels ==
             scrollController.position.maxScrollExtent &&
         !provider.isLoading) {
       provider.fetchData();
+      setState(() {});
     }
   }
+
   @override
   void initState() {
     final controller = Provider.of<CategoricContrllar>(context, listen: false);
-    scrollController.addListener
-      (_scrollListener);
+    scrollController.addListener(_scrollListener);
     if (controller.catagoriclist.msg == null) {
       loding().then((value) {
         setState(() {
@@ -69,6 +76,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -83,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           child: Stack(
             children: [
               Container(
-                height: size.height *0.22,
+                height: size.height * 0.22,
                 width: size.width,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -95,52 +103,50 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15,top: 15),
+                padding: const EdgeInsets.only(left: 15, top: 15),
                 child: AppBar(
                   elevation: 0,
                   backgroundColor: Colors.transparent,
-                  leading:profileData!.pic == null?Container(
-                    height: 90.h,
-                    width: 90.w,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image:
-                          AssetImage("assets/unnamed.png"),
-                        )
-                      // DecorationImage(
-                      //   fit: BoxFit.cover,
-                      //   image:   NetworkImage("$media${data.pic}"),
-                      // )
-                    ),
-                  )
-                      : CachedNetworkImage(
-                    imageUrl: "$media${profileData.pic}",
-                    imageBuilder: (context, imageProvider) =>
-                        Container(
+                  leading: profileData!.pic == null
+                      ? Container(
                           height: 90.h,
                           width: 90.w,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                    placeholder: (context, url) =>
-                        SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: AssetImage("assets/unnamed.png"),
+                              )
+                              // DecorationImage(
+                              //   fit: BoxFit.cover,
+                              //   image:   NetworkImage("$media${data.pic}"),
+                              // )
+                              ),
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: "$media${profileData.pic}",
+                          imageBuilder: (context, imageProvider) => Container(
                             height: 90.h,
                             width: 90.w,
-                            shape: BoxShape.circle,
-                            borderRadius: BorderRadius.circular(50)
-                                .w, // Adjust the border radius as needed
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
+                          placeholder: (context, url) => SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              height: 90.h,
+                              width: 90.w,
+                              shape: BoxShape.circle,
+                              borderRadius: BorderRadius.circular(50)
+                                  .w, // Adjust the border radius as needed
+                            ),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ) ,
                   // leading: Container(
                   //     height: 60.h,
                   //     width: 60.w,
@@ -185,8 +191,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                           onTap: () {
                             newPage(
-                                context: context,
-                                child: const SearchPage());
+                                context: context, child: const SearchPage());
                           },
                           child: SvgPicture.asset(
                             "assets/search.svg",
@@ -215,10 +220,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-
             ],
-          )
-      ),
+          )),
       endDrawer: Drawer(
         width: size.width.w,
         child: const SingleChildScrollView(child: DrawerWidget()),
@@ -332,8 +335,7 @@ class _HomePageState extends State<HomePage> {
                                   return const Center(
                                     child: CircularProgressIndicator(),
                                   );
-                                }
-                                else if(provider.isError){
+                                } else if (provider.isError) {
                                   return Container(
                                     padding: const EdgeInsets.all(10),
                                     alignment: Alignment.center,
@@ -342,8 +344,7 @@ class _HomePageState extends State<HomePage> {
                                       child: const Text('No more data'),
                                     ),
                                   );
-                                }
-                                else {
+                                } else {
                                   return Container(
                                     padding: const EdgeInsets.all(10),
                                     alignment: Alignment.center,

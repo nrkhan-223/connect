@@ -197,8 +197,6 @@ class _ApplyListWidgetState extends State<ApplyListWidget> {
     return Padding(
       padding: const EdgeInsets.only(top: 5, left: 20, right: 20, bottom: 2),
       child: Container(
-        // height: size.height*0.6,
-        // width: size.width*2.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.white,
@@ -282,16 +280,6 @@ class _ApplyListWidgetState extends State<ApplyListWidget> {
                       RichText(
                           text: TextSpan(children: [
                         TextSpan(
-                          text: "পোস্ট তৈরি করা হয়েছে: ",
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                              color: Colors.black.withOpacity(0.3),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 11.sp,
-                            ),
-                          ),
-                        ),
-                        TextSpan(
                             text: timeAgo(),
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
@@ -314,7 +302,7 @@ class _ApplyListWidgetState extends State<ApplyListWidget> {
                   height: 5.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0.h),
+                  padding: EdgeInsets.symmetric(horizontal: 8.h),
                   child: RichText(
                       text: TextSpan(children: [
                     TextSpan(
