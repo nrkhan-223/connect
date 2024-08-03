@@ -11,7 +11,13 @@ class MyPay extends StatefulWidget {
   final int index;
   final String membershipName;
 
-  const MyPay({super.key, required this.index, required this.membershipName});
+
+  const MyPay(
+      {super.key,
+      required this.index,
+      required this.membershipName,
+      });
+
   @override
   MyPayState createState() => MyPayState();
 }
@@ -44,11 +50,15 @@ class MyPayState extends State<MyPay> {
             print("fuad$message");
             if (event == EventState.success) {
               membershipUpdate
-                  .update(widget.index, context, widget.membershipName,)
+                  .update(
+                widget.index,
+                context,
+                widget.membershipName,
+              )
                   .then((value) {
                 //membershipUpdate.load(widget.membershipName, context);
               });
-            }else{
+            } else {
               newPage(context: context, child: const BottomNavPage());
               Fluttertoast.showToast(
                   msg: "Failed to update membership",
@@ -72,7 +82,7 @@ class MyPayState extends State<MyPay> {
           storeID: "aamarpaytest",
           // Use transactionAmountFromTextField when you pass amount with TextEditingController
           // transactionAmountFromTextField: amountTextEditingController,
-          transactionAmount: "200",
+          transactionAmount: "${profile.membershipModel!.msg![widget.index].price}",
           //The transactionID must be unique for every payment
           transactionID: "${DateTime.now().millisecondsSinceEpoch}",
           description: "test",

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:connect/Const/route.dart';
 import 'package:connect/aamarpay/aamarpay.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MemberShipPage extends StatefulWidget {
 class _MemberShipPageState extends State<MemberShipPage> {
   Map<String, dynamic>? paymentIntentData;
   var loader = true;
+  var price = [];
 
   @override
   void initState() {
@@ -38,6 +40,7 @@ class _MemberShipPageState extends State<MemberShipPage> {
 
   @override
   Widget build(BuildContext context) {
+
     var size = MediaQuery.of(context).size;
     final profile = Provider.of<ProfileProvider>(context, listen: true);
     final membershipUpdate =
@@ -332,9 +335,12 @@ class _MemberShipPageState extends State<MemberShipPage> {
                                               newPage(
                                                   context: context,
                                                   child: MyPay(
-                                                      index: 0,
-                                                      membershipName: widget
-                                                          .mambershipName));
+                                                    index: 0,
+                                                    membershipName:
+                                                        widget.mambershipName,
+
+                                                  ));
+
                                             },
                                             child: Center(
                                               child: Padding(
@@ -342,10 +348,12 @@ class _MemberShipPageState extends State<MemberShipPage> {
                                                       const EdgeInsets.all(8.0)
                                                           .r,
                                                   child: Container(
-                                                    padding: const EdgeInsets
-                                                        .only(
-                                                        top: 7,
-                                                        bottom: 1.5,left: 7,right: 7),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 7,
+                                                            bottom: 1.5,
+                                                            left: 7,
+                                                            right: 7),
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: Colors.red),
@@ -397,10 +405,12 @@ class _MemberShipPageState extends State<MemberShipPage> {
                                                       const EdgeInsets.all(8.0)
                                                           .r,
                                                   child: Container(
-                                                    padding: const EdgeInsets
-                                                        .only(
-                                                        top: 7,
-                                                        bottom: 1.5,left: 7,right: 7),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 7,
+                                                            bottom: 1.5,
+                                                            left: 7,
+                                                            right: 7),
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: Colors.red),
@@ -413,12 +423,12 @@ class _MemberShipPageState extends State<MemberShipPage> {
                                                           ? Colors.red
                                                           : Colors.white60,
                                                     ),
-                                                    child:  Center(
+                                                    child: Center(
                                                       child: Text("নির্বাচন",
                                                           style: TextStyle(
                                                             color: membershipUpdate
-                                                                .selectIndex ==
-                                                                1
+                                                                        .selectIndex ==
+                                                                    1
                                                                 ? Colors.white
                                                                 : Colors.red,
                                                             fontSize: 13,
@@ -441,9 +451,11 @@ class _MemberShipPageState extends State<MemberShipPage> {
                                               newPage(
                                                   context: context,
                                                   child: MyPay(
-                                                      index: 2,
-                                                      membershipName: widget
-                                                          .mambershipName));
+                                                    index: 2,
+                                                    membershipName:
+                                                        widget.mambershipName,
+
+                                                  ));
                                             },
                                             child: Center(
                                               child: Padding(
@@ -451,34 +463,36 @@ class _MemberShipPageState extends State<MemberShipPage> {
                                                       const EdgeInsets.all(8.0)
                                                           .r,
                                                   child: Container(
-                                                    padding: const EdgeInsets
-                                                        .only(
-                                                        top: 7,
-                                                        bottom: 1.5,left: 7,right: 7),
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.red),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color: membershipUpdate
-                                                                  .selectIndex ==
-                                                              2
-                                                          ? Colors.red
-                                                          : Colors.white60,
-                                                    ),
-                                                    child:  Center(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 7,
+                                                              bottom: 1.5,
+                                                              left: 7,
+                                                              right: 7),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.red),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color: membershipUpdate
+                                                                    .selectIndex ==
+                                                                2
+                                                            ? Colors.red
+                                                            : Colors.white60,
+                                                      ),
+                                                      child: Center(
                                                         child: Text("নির্বাচন",
                                                             style: TextStyle(
                                                               color: membershipUpdate
-                                                                  .selectIndex ==
-                                                                  2
+                                                                          .selectIndex ==
+                                                                      2
                                                                   ? Colors.white
                                                                   : Colors.red,
                                                               fontSize: 13,
                                                               // fontFamily: 'IrabotiMJ',
-                                                            )),)
-                                                  )
+                                                            )),
+                                                      ))
 
                                                   // Text( membershipUpdate.selectIndex==2?"Selected":"Select",style: TextStyle(
                                                   //   color:  membershipUpdate.selectIndex==2?Colors.black:Colors.red,
