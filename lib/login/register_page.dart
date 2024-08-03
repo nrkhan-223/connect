@@ -5,21 +5,15 @@ import 'package:provider/provider.dart';
 import '../controllar/register/register_controllar.dart';
 
 class SingUpPage extends StatefulWidget {
-  const SingUpPage({Key? key}) : super(key: key);
+  const SingUpPage({super.key});
 
   @override
   State<SingUpPage> createState() => _SingUpPageState();
 }
 
 class _SingUpPageState extends State<SingUpPage> {
-  // @override
-  // void dispose() {
-  //   final  controller = Provider.of<RegisterControllar>(context,listen: false);
-  //   controller.fullNameControllar.dispose();
-  //   // TODO: implement dispose
-  //   super.dispose();
-  // }
-
+  final _formKey = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<RegisterControllar>(context, listen: false);
@@ -32,10 +26,17 @@ class _SingUpPageState extends State<SingUpPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 30,),
-              Image.asset("assets/icon/logo2.png",scale: 2,),
+              const SizedBox(
+                height: 30,
+              ),
+              Image.asset(
+                "assets/icon/logo2.png",
+                scale: 2,
+              ),
 
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               Text(
                 'নতুন একাউন্ট তৈরি করুন',
                 textAlign: TextAlign.center,
@@ -44,7 +45,7 @@ class _SingUpPageState extends State<SingUpPage> {
                     fontFamily: 'IrabotiMJ',
                     fontSize: 23.sp,
                     letterSpacing:
-                    0 /*percentages not used in flutter. defaulting to zero*/,
+                        0 /*percentages not used in flutter. defaulting to zero*/,
                     fontWeight: FontWeight.bold,
                     height: 1),
               ),
@@ -155,15 +156,27 @@ class _SingUpPageState extends State<SingUpPage> {
                     padding: const EdgeInsets.only(
                       left: 18.0,
                     ),
-                    child: TextField(
-                      controller: controller.phoneControllar,
-                      decoration: const InputDecoration(
-                        hintText: "ফোন",
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'IrabotiMJ',
-                          fontWeight: FontWeight.normal,
+                    child: Form(
+                      key: _formKey2,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        validator: (value){
+                          if (value!.isEmpty) {
+                            return 'Please enter an phone number';
+                          } else if (value.length!=11) {
+                            return 'Please enter a valid phone number';
+                          }
+                          return null;
+                        },
+                        controller: controller.phoneControllar,
+                        decoration: const InputDecoration(
+                          hintText: "ফোন",
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'IrabotiMJ',
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
@@ -185,15 +198,31 @@ class _SingUpPageState extends State<SingUpPage> {
                     padding: const EdgeInsets.only(
                       left: 18.0,
                     ),
-                    child: TextField(
-                      controller: controller.emailControllar,
-                      decoration: const InputDecoration(
-                        hintText: "ইমেইল",
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'IrabotiMJ',
-                          fontWeight: FontWeight.normal,
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: controller.emailControllar,
+
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter an email address';
+                          } else if (!RegExp(
+                              r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
+                              .hasMatch(value)) {
+                            return 'Please enter a valid email address';
+                          }
+                          return null;
+                        },
+
+
+                        decoration: const InputDecoration(
+                          hintText: "ইমেইল",
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'IrabotiMJ',
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
@@ -207,7 +236,7 @@ class _SingUpPageState extends State<SingUpPage> {
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xffd9d9d9)),
+                    border: Border.all(color: const Color(0xffd9d9d9)),
                     color: const Color(0xffffffff),
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -265,7 +294,10 @@ class _SingUpPageState extends State<SingUpPage> {
               ),
               InkWell(
                 onTap: () {
-                  controller.getRegister(context);
+                  if (_formKey.currentState!.validate()||_formKey2.currentState!.validate()) {
+                    controller.getRegister(context);
+                  }
+
                 },
                 child: controller.loder
                     ? const Center(
